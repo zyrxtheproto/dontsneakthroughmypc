@@ -2,6 +2,7 @@ import requests
 import datetime
 import time
 from colorama import Fore, Style, init
+import os
 
 init(autoreset=True)
 
@@ -29,9 +30,10 @@ def send_push_notification(api_key, title, body):
     if response.status_code == 200:
         print("1")
     else:
-        log_file_name = f"log_{datetime.datetime.now().strftime('%Y-%m-%d')}.txt"
-        with open(log_file_name, "a", encoding="utf-8") as log_file: 
-            log_file.write(f"Error: {response.text}\n")
+      log_file_name = f"log_{datetime.datetime.now().strftime('%Y-%m-%d')}.txt"
+      log_file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), log_file_name)
+      with open(log_file_path, "a", encoding="utf-8") as log_file: 
+          log_file.write(f"Error: {response.text}\n")
 
 
 message = """
